@@ -39,3 +39,14 @@ Disimpan di `localStorage` dengan namespace `integerLearning_progress_v1`. Tombo
 Versi ini meniru pola visual aplikasi KPK/FPB rujukan: kartu pembelajaran, masalah kontekstual, progressive reveal, feedback langsung, dan aktivitas manipulatif. Penjumlahan/pengurangan tetap memakai kartu bilangan: positif biru dan negatif merah, ditata vertikal dengan area pasangan nol di tengah. Desktop mendukung drag-and-drop; HP juga memiliki fallback tap agar tetap nyaman.
 
 Perkalian menggunakan konteks perubahan skor permainan. Pembagian menggunakan konteks pembagian perubahan saldo selama beberapa hari. Keduanya memakai objek pictorial yang dapat diseret.
+
+## Pembaruan v9
+
+- Tampilan diperbarui menjadi lebih modern dengan tipografi lebih jelas, kartu materi lebih rapi, dan feedback visual yang lebih kuat.
+- Setelah jawaban eksplorasi benar, aplikasi menampilkan kalimat kesimpulan operasi, misalnya: `Jadi hasil dari 3 + 2 adalah 5.`
+- Setelah Penjumlahan tersedia 5 latihan acak sebelum masuk ke Pengurangan.
+- Setelah Pengurangan tersedia 5 latihan acak sebelum masuk ke Perkalian.
+- Setelah Perkalian tersedia 5 contoh soal acak berbasis situasi sehari-hari sebelum masuk ke Pembagian.
+- Setelah Pembagian tersedia 5 contoh soal acak berbasis situasi sehari-hari sebelum Evaluasi Akhir.
+- Latihan menggunakan pilihan kartu/angka dan tidak memerlukan input keyboard.
+- Pembagian acak selalu menghasilkan hasil bilangan bulat dan tidak menggunakan pembagi nol.

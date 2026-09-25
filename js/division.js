@@ -1,1 +1,112 @@
-function renderDivision(){setLast('division');app.innerHTML=lessonShell('Pembagian Bilangan Bulat','Gunakan pembagian sebagai pengelompokan dan hubungkan dengan perkalian.',`<div class="section"><p class="eyebrow">Contoh sehari-hari</p><h2>💳 Membagi perubahan saldo</h2><div class="story-strip"><span class="story-icon">💳</span><div><b>Total perubahan saldo selama 3 hari adalah −12 ribu rupiah, dengan perubahan yang sama setiap hari.</b><small>Berapa perubahan saldo per hari?</small></div></div><div class="equation">(−12) ÷ 3 = ?</div><div id="divBank" class="object-bank">${Array.from({length:12},(_,i)=>`<span class="debt-dot" draggable="true" data-id="${i}">−1</span>`).join('')}</div><p class="instruction">Bagikan 12 token −1 secara sama rata ke 3 hari. Seret token ke kotak hari. Di HP, ketuk token lalu ketuk kotak.</p><div id="divGroups" class="pictorial-groups">${[1,2,3].map(i=>`<div class="picture-group div-drop" data-day="${i}"><b>Hari ${i}</b><div class="day-tokens"></div><small>0 token</small></div>`).join('')}</div><div id="divFeedback" class="feedback">Bagikan token sampai setiap hari mendapat jumlah yang sama.</div><div id="divQuestion"></div></div>`);let selected=null;const tokens=[...document.querySelectorAll('.debt-dot')],groups=[...document.querySelectorAll('.div-drop')];tokens.forEach(t=>{t.addEventListener('dragstart',e=>{selected=t;e.dataTransfer.setData('text/plain',t.dataset.id)});t.addEventListener('click',()=>{if(t.classList.contains('used'))return;tokens.forEach(x=>x.classList.remove('selected'));selected=t;t.classList.add('selected')})});groups.forEach(g=>{g.addEventListener('dragover',e=>{e.preventDefault();g.classList.add('drag-over')});g.addEventListener('dragleave',()=>g.classList.remove('drag-over'));g.addEventListener('drop',e=>{e.preventDefault();g.classList.remove('drag-over');place(g)});g.addEventListener('click',()=>place(g))});function place(g){if(!selected||selected.classList.contains('used'))return;const counts=groups.map(x=>x.querySelectorAll('.debt-dot').length);const min=Math.min(...counts);if(counts[groups.indexOf(g)]>min){divFeedback.innerHTML='Coba bagikan secara merata. Isi kelompok yang masih lebih sedikit.';return}const clone=selected.cloneNode(true);clone.removeAttribute('draggable');clone.classList.remove('selected');g.querySelector('.day-tokens').appendChild(clone);selected.classList.add('used');selected.classList.remove('selected');selected=null;g.querySelector('small').textContent=`${g.querySelectorAll('.debt-dot').length} token`;const total=tokens.filter(t=>t.classList.contains('used')).length;divFeedback.innerHTML=`Sudah dibagikan <b>${total} dari 12</b> token.`;if(total===12){const c=groups.map(x=>x.querySelectorAll('.debt-dot').length);if(c.every(x=>x===4)){divFeedback.innerHTML='✓ Setiap hari mendapat 4 token negatif. Jadi perubahan per hari adalah −4.';divQuestion.innerHTML=`<p>Hubungkan dengan perkalian: <b>3 × ? = −12</b></p>${choices([-4,-3,3,4],-4)}<div class="remember">Pembagian adalah kebalikan dari perkalian. Tanda berbeda menghasilkan hasil negatif.</div>`;wireChoices(-4,()=>{complete('division');document.getElementById('nextArea').innerHTML='<button class="btn" onclick="renderQuiz()">Mulai Evaluasi →</button>';document.getElementById('nextArea').scrollIntoView({behavior:'smooth',block:'center'})})}}}}
+function renderDivision(){
+  setLast('division');
+  app.innerHTML=lessonShell(
+    'Pembagian Bilangan Bulat',
+    'Gunakan pembagian sebagai pengelompokan dan hubungkan dengan perkalian.',
+    `<div class="section">
+      <p class="eyebrow">Contoh sehari-hari</p>
+      <h2>💳 Membagi perubahan saldo</h2>
+      <div class="story-strip">
+        <span class="story-icon">💳</span>
+        <div>
+          <b>Total perubahan saldo selama 3 hari adalah −12 ribu rupiah, dengan perubahan yang sama setiap hari.</b>
+          <small>Berapa perubahan saldo per hari?</small>
+        </div>
+      </div>
+      <div class="equation">(−12) ÷ 3 = ?</div>
+      <div id="divBank" class="object-bank">${Array.from({length:12},(_,i)=>`<span class="debt-dot" draggable="true" data-id="${i}">−1</span>`).join('')}</div>
+      <p class="instruction">Bagikan 12 token −1 secara sama rata ke 3 hari. Seret token ke kotak hari. Di HP, ketuk token lalu ketuk kotak.</p>
+      <div id="divGroups" class="pictorial-groups">${[1,2,3].map(i=>`<div class="picture-group div-drop" data-day="${i}"><b>Hari ${i}</b><div class="day-tokens"></div><small>0 token</small></div>`).join('')}</div>
+      <div id="divFeedback" class="feedback">Bagikan token sampai setiap hari mendapat jumlah yang sama.</div>
+      <div id="divQuestion"></div>
+    </div>`
+  );
+
+  let selected=null;
+  const tokens=[...document.querySelectorAll('.debt-dot')];
+  const groups=[...document.querySelectorAll('.div-drop')];
+
+  tokens.forEach(t=>{
+    t.addEventListener('dragstart',e=>{
+      selected=t;
+      e.dataTransfer.setData('text/plain',t.dataset.id);
+    });
+    t.addEventListener('click',()=>{
+      if(t.classList.contains('used'))return;
+      tokens.forEach(x=>x.classList.remove('selected'));
+      selected=t;
+      t.classList.add('selected');
+    });
+  });
+
+  groups.forEach(g=>{
+    g.addEventListener('dragover',e=>{
+      e.preventDefault();
+      g.classList.add('drag-over');
+    });
+    g.addEventListener('dragleave',()=>g.classList.remove('drag-over'));
+    g.addEventListener('drop',e=>{
+      e.preventDefault();
+      g.classList.remove('drag-over');
+      place(g);
+    });
+    g.addEventListener('click',()=>place(g));
+  });
+
+  function place(g){
+    if(!selected||selected.classList.contains('used'))return;
+    const counts=groups.map(x=>x.querySelectorAll('.debt-dot').length);
+    const min=Math.min(...counts);
+    if(counts[groups.indexOf(g)]>min){
+      divFeedback.innerHTML='Coba bagikan secara merata. Isi kelompok yang masih lebih sedikit.';
+      return;
+    }
+
+    const clone=selected.cloneNode(true);
+    clone.removeAttribute('draggable');
+    clone.classList.remove('selected');
+    g.querySelector('.day-tokens').appendChild(clone);
+    selected.classList.add('used');
+    selected.classList.remove('selected');
+    selected=null;
+    g.querySelector('small').textContent=`${g.querySelectorAll('.debt-dot').length} token`;
+
+    const total=tokens.filter(t=>t.classList.contains('used')).length;
+    divFeedback.innerHTML=`Sudah dibagikan <b>${total} dari 12</b> token.`;
+
+    if(total!==12)return;
+    const perGroup=groups.map(x=>x.querySelectorAll('.debt-dot').length);
+    if(!perGroup.every(x=>x===4))return;
+
+    divFeedback.innerHTML='✓ Setiap hari mendapat 4 token negatif. Jadi perubahan per hari adalah −4.';
+    divQuestion.innerHTML=`
+      <div class="discover-box">
+        <p>Hubungkan dengan perkalian: <b>3 × ? = −12</b></p>
+        ${choices([-4,-3,3,4],-4)}
+        <div id="divisionConclusion"></div>
+      </div>`;
+
+    wireChoices(-4,()=>{
+      document.getElementById('divisionConclusion').innerHTML=`
+        <div class="result-sentence pop">
+          <span class="result-check">✓</span>
+          <div>
+            <b>Benar!</b>
+            <p>Jadi hasil dari <strong>(−12) ÷ 3</strong> adalah <strong>−4</strong>.</p>
+            <small>Pembagian adalah kebalikan dari perkalian. Tanda berbeda menghasilkan hasil negatif.</small>
+          </div>
+        </div>`;
+
+      startTopicPractice({
+        title:'Latihan Pembagian',
+        subtitle:'Kerjakan contoh soal acak dari situasi sehari-hari. Setelah selesai, evaluasi akhir akan terbuka.',
+        count:5,
+        makeQuestion:divisionQuestion,
+        onComplete:()=>{
+          complete('division');
+          renderQuiz();
+        }
+      });
+    });
+  }
+}
