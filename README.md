@@ -34,3 +34,8 @@ Disimpan di `localStorage` dengan namespace `integerLearning_progress_v1`. Tombo
 
 ## Catatan
 `js/quiz.js` memuat bank soal fallback agar aplikasi tetap berfungsi ketika `questions.json` tidak dapat dimuat, misalnya saat file dibuka secara langsung. Untuk pengembangan berikutnya, bank soal dapat dipindahkan sepenuhnya ke JSON dan dimuat via `fetch` saat dijalankan di web server/GitHub Pages.
+
+## Revisi pictorial dan drag-and-drop
+Versi ini meniru pola visual aplikasi KPK/FPB rujukan: kartu pembelajaran, masalah kontekstual, progressive reveal, feedback langsung, dan aktivitas manipulatif. Penjumlahan/pengurangan tetap memakai kartu bilangan: positif biru dan negatif merah, ditata vertikal dengan area pasangan nol di tengah. Desktop mendukung drag-and-drop; HP juga memiliki fallback tap agar tetap nyaman.
+
+Perkalian menggunakan konteks perubahan skor permainan. Pembagian menggunakan konteks pembagian perubahan saldo selama beberapa hari. Keduanya memakai objek pictorial yang dapat diseret.
