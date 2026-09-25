@@ -50,3 +50,9 @@ Perkalian menggunakan konteks perubahan skor permainan. Pembagian menggunakan ko
 - Setelah Pembagian tersedia 5 contoh soal acak berbasis situasi sehari-hari sebelum Evaluasi Akhir.
 - Latihan menggunakan pilihan kartu/angka dan tidak memerlukan input keyboard.
 - Pembagian acak selalu menghasilkan hasil bilangan bulat dan tidak menggunakan pembagi nol.
+
+## Pembaruan v12
+- Model matematika perkalian dan pembagian ditampilkan langsung pada contoh kontekstual.
+- Pola perkalian menggunakan faktor 4, 3, 2, 1, 0, −1, −2 dengan faktor kedua −2 untuk menemukan negatif × negatif.
+- Pola pembagian menggunakan pembagi −2 dan bergerak dari bilangan positif, 0, ke bilangan negatif untuk menemukan negatif ÷ negatif.
+- Ditambahkan ringkasan visual aturan tanda dan trik tanda sama/tanda berbeda sebelum latihan.

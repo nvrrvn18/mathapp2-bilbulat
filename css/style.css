@@ -139,3 +139,33 @@ main{max-width:960px;padding:24px 20px 100px}
 @keyframes transitionDot{0%,100%{transform:translateY(0);opacity:.45}50%{transform:translateY(-5px);opacity:1}}
 @keyframes transitionLoad{from{width:0}to{width:100%}}
 @media (prefers-reduced-motion:reduce){.learning-transition,.learning-transition-card{transition:none}.learning-transition-check,.learning-transition-loader i,.learning-transition-progress b{animation:none}.learning-transition-progress b{width:100%}}
+
+/* v12: clearer mathematical models, pattern discovery, and sign rules */
+.math-model-card{margin:18px 0 22px;padding:18px 20px;border-radius:20px;background:linear-gradient(135deg,#eef6ff,#fff);border:1px solid #cfe3ff;box-shadow:0 10px 28px rgba(30,64,175,.08);display:grid;gap:5px;text-align:center}
+.math-model-card small{font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#52637a}
+.math-model-card strong{font-size:clamp(1.55rem,5vw,2.35rem);line-height:1.15;color:#14213d}
+.math-model-card span{color:#516078;font-weight:650}
+.pattern-intro{font-size:1.02rem;line-height:1.7;color:#3f4f66;margin-bottom:16px}
+.modern-pattern{display:grid;gap:10px;margin:16px 0}
+.pattern-step{display:grid;grid-template-columns:minmax(130px,1fr) auto minmax(110px,1fr);align-items:center;gap:12px;padding:13px 15px;border-radius:16px;background:#f8fafc;border:1px solid #e2e8f0;transition:.2s ease}
+.pattern-step.known strong{font-size:1.2rem;color:#1e3a5f}
+.pattern-step.question{background:#fffdf7;border-color:#f3df9f}
+.pattern-step.locked-step{opacity:.55}
+.pattern-factor{font-weight:800;font-size:1.05rem;color:#17233d}
+.pattern-eq{font-weight:900;color:#64748b}
+.mini-choice-row{display:flex;flex-wrap:wrap;gap:7px;justify-content:flex-start}
+.mini-choice{min-width:48px;min-height:44px;border-radius:12px;border:1.5px solid #cbd5e1;background:white;font-weight:850;font-size:1rem;cursor:pointer;transition:.18s ease}
+.mini-choice:hover:not(:disabled){transform:translateY(-1px);border-color:#7aa7e8}
+.mini-choice.correct{background:#e9f9ef;border-color:#48a868;color:#176733}
+.mini-choice.wrong{background:#fff0ed;border-color:#df6d5e;color:#9f2f23;animation:shake .25s ease}
+.concept-summary{margin-top:20px;padding:20px;border-radius:22px;background:linear-gradient(145deg,#f8fbff,#ffffff);border:1px solid #dbe7f7;box-shadow:0 12px 32px rgba(15,23,42,.08);display:grid;grid-template-columns:auto 1fr;gap:16px}
+.concept-summary-icon{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;background:#e8f1ff;font-size:1.35rem}
+.concept-summary h3{margin:.15rem 0 .55rem;font-size:clamp(1.25rem,4vw,1.65rem)}
+.sign-rule-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0}
+.sign-rule{padding:14px;border-radius:16px;border:1px solid;display:grid;gap:4px}
+.sign-rule b{font-size:.96rem}.sign-rule span{font-size:.85rem;color:#64748b}.sign-rule strong{font-size:1.15rem}
+.sign-rule.positive{background:#effaf3;border-color:#bfe8cc;color:#176733}
+.sign-rule.negative{background:#fff2ef;border-color:#f2c2ba;color:#9a3327}
+.memory-trick{margin-top:14px;padding:16px 17px;border-radius:17px;background:#16233b;color:white}
+.memory-trick b{display:block;margin-bottom:6px;color:#fff}.memory-trick p{margin:0;line-height:1.65;color:#f8fbff}
+@media(max-width:640px){.pattern-step{grid-template-columns:1fr auto;gap:8px}.pattern-step .mini-choice-row,.pattern-step>strong{grid-column:1/-1}.sign-rule-grid{grid-template-columns:1fr}.concept-summary{grid-template-columns:1fr}.concept-summary-icon{width:42px;height:42px}.mini-choice{flex:1 1 44px}.math-model-card{padding:16px 14px}}
