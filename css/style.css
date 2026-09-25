@@ -102,3 +102,19 @@ main{max-width:960px;padding:24px 20px 100px}
   main{padding:14px 12px 100px}.section{padding:18px 15px;border-radius:20px}.lesson-heading h1{font-size:29px}.story-strip{padding:13px}.story-icon{font-size:32px}.scenario-btn{min-height:72px}.practice-header{align-items:stretch}.practice-header p{font-size:14px}.practice-options{grid-template-columns:1fr 1fr}.result-sentence p{font-size:16px}.lab-area{padding:12px}.hero{padding:32px 17px}.hero-positive,.hero-negative{width:48px;height:64px}
 }
 @media(max-width:380px){.practice-options{grid-template-columns:1fr}.practice-choice{min-height:52px}}
+
+/* v10: sequential exploration and clearer mathematical models */
+.explore-progress{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px;scrollbar-width:thin}
+.explore-chip{flex:0 0 auto;padding:9px 12px;border-radius:999px;background:#eef2f7;color:#667085;font-size:.82rem;font-weight:700;border:1px solid #e1e7ef}
+.explore-chip.active{background:#e8f1ff;color:#124a9c;border-color:#9fc4ff;box-shadow:0 5px 14px rgba(29,78,216,.12)}
+.explore-chip.done{background:#eaf8ef;color:#18723a;border-color:#b8e5c7}
+.math-model-card{margin:8px 0 18px;padding:18px;border-radius:20px;background:linear-gradient(145deg,#ffffff,#f3f7ff);border:1px solid #dce7f8;box-shadow:0 12px 30px rgba(19,49,92,.09);text-align:center}
+.math-model-label{display:block;text-transform:uppercase;letter-spacing:.08em;font-size:.72rem;font-weight:800;color:#667085;margin-bottom:6px}
+.math-model-expression{font-size:clamp(1.9rem,8vw,3rem);font-weight:900;color:#172b4d;line-height:1.15;font-variant-numeric:tabular-nums}
+.quiz-topline{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.wrong-counter{display:inline-flex;align-items:center;gap:4px;padding:8px 11px;border-radius:999px;background:#fff2f0;color:#a43c32;font-size:.86rem;font-weight:700;border:1px solid #ffd4cf}
+.quiz-progress{height:8px;border-radius:999px;background:#e8edf5;overflow:hidden;margin:8px 0 24px}
+.quiz-progress i{display:block;height:100%;background:linear-gradient(90deg,#2f6fdd,#5d8ff0);border-radius:inherit;transition:width .3s ease}
+.quiz-restart{text-align:center;padding:22px;border-radius:18px;background:#fff8e8;border:1px solid #f3d28e;margin-top:16px}
+.quiz-restart span{font-size:2rem}.quiz-restart h3{margin:8px 0 4px}.quiz-restart p{margin:0;color:#6f5b2c}
+@media(max-width:520px){.math-model-card{padding:15px 10px}.explore-chip{font-size:.76rem}.quiz-topline{align-items:flex-start}.wrong-counter{font-size:.8rem}}
