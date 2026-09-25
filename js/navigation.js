@@ -1,0 +1,1 @@
+function go(id){({home:renderHome,intro:renderIntro,addition:renderAddition,subtraction:renderSubtraction,multiplication:renderMultiplication,division:renderDivision,quiz:renderQuiz,progress:renderProgress,learn:renderLearn}[id]||renderHome)()}document.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>go(b.dataset.nav));

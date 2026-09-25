@@ -1,0 +1,1 @@
+{"note":"Bank soal utama dapat dikembangkan di sini. Versi demo menggunakan soal internal di js/quiz.js sebagai fallback.","questions":[{"id":1,"topic":"addition","type":"choice","question":"5 + (-3) = ...","options":[2,-2,8,-8],"answer":2,"hint":"Buat pasangan nol.","explanation":"Tiga pasangan nol menyisakan dua positif.","difficulty":"basic"}]}

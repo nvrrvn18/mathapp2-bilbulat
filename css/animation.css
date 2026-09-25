@@ -1,0 +1,1 @@
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}.hero,.section,.module{animation:fadeUp .35s ease}.paired{animation:fadeUp .3s ease}.shake{animation:shake .25s}@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
