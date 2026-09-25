@@ -1,3 +1,8 @@
 @media(max-width:768px){main{padding:14px}.topbar span{display:none}.grid{grid-template-columns:1fr}.choice-grid{grid-template-columns:1fr}.section{padding:16px}.int-card{width:52px;height:70px}.btn{width:100%}.hero{padding:24px 15px}.progress-mini div{width:62px}.scenario-grid{grid-template-columns:1fr}.lab-controls{display:grid}.lab-controls .btn{width:100%}}
 
 @media(max-width:480px){.integer-board{grid-template-columns:minmax(74px,.9fr) minmax(108px,1.2fr) minmax(74px,.9fr);gap:5px}.card-lane,.zero-channel{min-height:320px;padding:6px}.vertical-stack{display:flex!important;flex-direction:column!important;align-items:center;flex-wrap:nowrap!important;gap:7px}.vertical-stack .int-card{flex:0 0 auto;width:48px;height:66px}.lane-title,.zero-title{font-size:12px}.drop-hint{font-size:10px}}
+
+/* v7: force vertical card layout on all viewport sizes */
+.integer-board .vertical-stack{display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important}
+.integer-board .int-card{display:flex!important;flex-direction:column!important;width:58px!important;height:76px!important;flex:0 0 auto!important}
+@media(max-width:640px){.integer-board .int-card{width:48px!important;height:66px!important}.integer-board{display:grid!important;grid-template-columns:minmax(70px,1fr) minmax(96px,1.15fr) minmax(70px,1fr)!important}}
