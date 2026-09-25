@@ -118,3 +118,24 @@ main{max-width:960px;padding:24px 20px 100px}
 .quiz-restart{text-align:center;padding:22px;border-radius:18px;background:#fff8e8;border:1px solid #f3d28e;margin-top:16px}
 .quiz-restart span{font-size:2rem}.quiz-restart h3{margin:8px 0 4px}.quiz-restart p{margin:0;color:#6f5b2c}
 @media(max-width:520px){.math-model-card{padding:15px 10px}.explore-chip{font-size:.76rem}.quiz-topline{align-items:flex-start}.wrong-counter{font-size:.8rem}}
+
+
+/* v11: dynamic transparent transition between exploration steps */
+.learning-transition{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:20px;background:rgba(18,39,63,.24);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;transition:opacity .22s ease;pointer-events:auto}
+.learning-transition.show{opacity:1}
+.learning-transition.leave{opacity:0}
+.learning-transition-card{width:min(420px,92vw);padding:24px 22px 18px;border-radius:26px;background:rgba(255,255,255,.94);border:1px solid rgba(255,255,255,.82);box-shadow:0 24px 60px rgba(17,42,70,.25);text-align:center;transform:translateY(14px) scale(.97);transition:transform .28s cubic-bezier(.2,.8,.2,1);overflow:hidden}
+.learning-transition.show .learning-transition-card{transform:translateY(0) scale(1)}
+.learning-transition-check{width:58px;height:58px;margin:0 auto 12px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#38b66b,#23914f);color:#fff;font-size:30px;font-weight:900;box-shadow:0 10px 24px rgba(35,145,79,.28);animation:transitionPop .45s cubic-bezier(.2,.8,.2,1)}
+.learning-transition-copy strong{display:block;font-size:1.28rem;color:#173a59}
+.learning-transition-copy p{margin:6px 0 9px;color:#50657a;line-height:1.5}
+.learning-transition-copy span{display:inline-flex;align-items:center;justify-content:center;padding:7px 11px;border-radius:999px;background:#edf5ff;color:#285b98;font-size:.82rem;font-weight:800;border:1px solid #d7e8fb}
+.learning-transition-loader{display:flex;justify-content:center;gap:7px;margin:16px 0 12px}
+.learning-transition-loader i{width:8px;height:8px;border-radius:50%;background:#3d78b1;animation:transitionDot .9s ease-in-out infinite}
+.learning-transition-loader i:nth-child(2){animation-delay:.14s}.learning-transition-loader i:nth-child(3){animation-delay:.28s}
+.learning-transition-progress{height:5px;border-radius:999px;background:#e8eef5;overflow:hidden}
+.learning-transition-progress b{display:block;height:100%;width:0;background:linear-gradient(90deg,#315f88,#5b93c4);border-radius:inherit;animation:transitionLoad 1.5s linear forwards}
+@keyframes transitionPop{0%{transform:scale(.7);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@keyframes transitionDot{0%,100%{transform:translateY(0);opacity:.45}50%{transform:translateY(-5px);opacity:1}}
+@keyframes transitionLoad{from{width:0}to{width:100%}}
+@media (prefers-reduced-motion:reduce){.learning-transition,.learning-transition-card{transition:none}.learning-transition-check,.learning-transition-loader i,.learning-transition-progress b{animation:none}.learning-transition-progress b{width:100%}}

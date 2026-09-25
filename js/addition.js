@@ -101,10 +101,10 @@ function renderAddition(){
         document.getElementById('addResultSentence').innerHTML=`<div class="result-sentence pop"><span class="result-check">✓</span><div><b>Benar!</b><p>Jadi hasil dari <strong>${plainNumber(s.a)} + ${resultTerm(s.b)}</strong> adalah <strong>${plainNumber(s.answer)}</strong>.</p></div></div>`;
         currentIndex++;
         if(currentIndex<scenarios.length){
-          setTimeout(()=>{renderScenario();document.getElementById('addLab')?.scrollIntoView({behavior:'smooth',block:'start'});},850);
+          showLearningTransition({message:'Kita lanjut ke bentuk penjumlahan berikutnya.',nextLabel:`Eksplorasi ${currentIndex+1} dari ${scenarios.length}`,onDone:()=>{renderScenario();document.getElementById('addLab')?.scrollIntoView({behavior:'smooth',block:'start'});}});
         }else{
           renderProgress();
-          setTimeout(()=>startTopicPractice({title:'Latihan Penjumlahan',subtitle:'Kerjakan 5 soal acak.',count:5,makeQuestion:additionQuestion,onComplete:()=>{complete('addition');go('subtraction')}}),850);
+          showLearningTransition({title:'Eksplorasi selesai!',message:'Semua bentuk penjumlahan sudah kamu selesaikan.',nextLabel:'Masuk ke Latihan Penjumlahan',onDone:()=>startTopicPractice({title:'Latihan Penjumlahan',subtitle:'Kerjakan 5 soal acak.',count:5,makeQuestion:additionQuestion,onComplete:()=>{complete('addition');go('subtraction')}})});
         }
       });
     }

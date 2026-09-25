@@ -177,3 +177,30 @@ function renderLearn(){const first=ORDER.find(x=>unlocked(x)&&!loadProgress().do
 function renderProgress(){const p=loadProgress();app.innerHTML=`<div class="section"><p class="eyebrow">Perjalanan Belajar</p><h1>Progress Belajar</h1>${CONTENT.modules.map(m=>`<div class="progress-row"><div><b>${m[1]}</b><span>${p.done.includes(m[0])?'100% selesai':unlocked(m[0])?'Belum selesai':'Terkunci'}</span></div><strong>${p.done.includes(m[0])?'✓':unlocked(m[0])?'•':'🔒'}</strong></div>`).join('')}<p><b>Nilai evaluasi:</b> ${p.score??'Belum ada'}</p><button class="btn secondary" onclick="resetProgress()">Reset Progress</button></div>`}
 function lockedMsg(){app.innerHTML='<div class="section"><h2>Evaluasi masih terkunci</h2><p>Selesaikan seluruh materi terlebih dahulu.</p><button class="btn" onclick="renderLearn()">Lanjut Belajar</button></div>'}
 renderHome();
+
+
+function showLearningTransition({title='Benar!',message='Bersiap ke eksplorasi berikutnya…',nextLabel='Eksplorasi berikutnya',onDone,duration=1500}={}){
+  document.querySelector('.learning-transition')?.remove();
+  const overlay=document.createElement('div');
+  overlay.className='learning-transition';
+  overlay.setAttribute('role','status');
+  overlay.setAttribute('aria-live','polite');
+  overlay.innerHTML=`
+    <div class="learning-transition-card">
+      <div class="learning-transition-check">✓</div>
+      <div class="learning-transition-copy">
+        <strong>${title}</strong>
+        <p>${message}</p>
+        <span>${nextLabel}</span>
+      </div>
+      <div class="learning-transition-loader" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="learning-transition-progress" aria-hidden="true"><b></b></div>
+    </div>`;
+  document.body.appendChild(overlay);
+  requestAnimationFrame(()=>overlay.classList.add('show'));
+  const finish=()=>{
+    overlay.classList.add('leave');
+    setTimeout(()=>{overlay.remove();onDone?.()},260);
+  };
+  setTimeout(finish,duration);
+}

@@ -79,10 +79,10 @@ function renderSubtraction(){
         document.getElementById('subResultSentence').innerHTML=`<div class="result-sentence pop"><span class="result-check">✓</span><div><b>Benar!</b><p>Jadi hasil dari <strong>${plainNumber(s.a)} − ${resultTerm(s.b)}</strong> adalah <strong>${plainNumber(s.answer)}</strong>.</p></div></div>`;
         currentIndex++;
         if(currentIndex<scenarios.length){
-          setTimeout(()=>{renderScenario();document.getElementById('subLab')?.scrollIntoView({behavior:'smooth',block:'start'});},850);
+          showLearningTransition({message:'Kita lanjut ke bentuk pengurangan berikutnya.',nextLabel:`Eksplorasi ${currentIndex+1} dari ${scenarios.length}`,onDone:()=>{renderScenario();document.getElementById('subLab')?.scrollIntoView({behavior:'smooth',block:'start'});}});
         }else{
           renderProgress();
-          setTimeout(()=>startTopicPractice({title:'Latihan Pengurangan',subtitle:'Kerjakan 5 soal acak.',count:5,makeQuestion:subtractionQuestion,onComplete:()=>{complete('subtraction');go('multiplication')}}),850);
+          showLearningTransition({title:'Eksplorasi selesai!',message:'Semua bentuk pengurangan sudah kamu selesaikan.',nextLabel:'Masuk ke Latihan Pengurangan',onDone:()=>startTopicPractice({title:'Latihan Pengurangan',subtitle:'Kerjakan 5 soal acak.',count:5,makeQuestion:subtractionQuestion,onComplete:()=>{complete('subtraction');go('multiplication')}})});
         }
       });
     }
