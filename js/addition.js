@@ -14,7 +14,7 @@ function renderAddition(){
     `<div class="section pictorial-head">
       <p class="eyebrow">Eksplorasi Kartu Bilangan</p>
       <h2>Penjumlahan</h2>
-      <p class="section-intro">Selesaikan bentuk penjumlahan secara berurutan. Setelah jawaban benar, eksplorasi berikutnya muncul otomatis.</p>
+      <p class="section-intro">Selesaikan bentuk penjumlahan secara berurutan. Setelah jawaban benar, pilih sendiri apakah ingin mengulangi atau melanjutkan eksplorasi.</p>
       <div class="explore-progress" id="addExploreProgress"></div>
       <div id="addLab" class="lab-area"></div>
     </div>`
@@ -99,13 +99,24 @@ function renderAddition(){
       document.getElementById('addStep').innerHTML=`<div id="addAnswer" class="discover-box"><p><b>Berapa hasilnya?</b></p>${choices(uniqueOpts(s.answer),s.answer)}<div id="addResultSentence"></div></div>`;
       wireChoices(s.answer,()=>{
         document.getElementById('addResultSentence').innerHTML=`<div class="result-sentence pop"><span class="result-check">✓</span><div><b>Benar!</b><p>Jadi hasil dari <strong>${plainNumber(s.a)} + ${resultTerm(s.b)}</strong> adalah <strong>${plainNumber(s.answer)}</strong>.</p></div></div>`;
-        currentIndex++;
-        if(currentIndex<scenarios.length){
-          showLearningTransition({message:'Kita lanjut ke bentuk penjumlahan berikutnya.',nextLabel:`Eksplorasi ${currentIndex+1} dari ${scenarios.length}`,onDone:()=>{renderScenario();document.getElementById('addLab')?.scrollIntoView({behavior:'smooth',block:'start'});}});
-        }else{
-          renderProgress();
-          showLearningTransition({title:'Eksplorasi selesai!',message:'Semua bentuk penjumlahan sudah kamu selesaikan.',nextLabel:'Masuk ke Latihan Penjumlahan',onDone:()=>startTopicPractice({title:'Latihan Penjumlahan',subtitle:'Kerjakan 5 soal acak.',count:5,makeQuestion:additionQuestion,onComplete:()=>{complete('addition');go('subtraction')}})});
-        }
+        const actionHost=document.getElementById('addResultSentence');
+        const isLast=currentIndex===scenarios.length-1;
+        actionHost.insertAdjacentHTML('beforeend',`<div class="explore-actions pop"><button id="repeatAddExplore" class="btn secondary">↻ Ulangi eksplorasi</button><button id="nextAddExplore" class="btn">${isLast?'Lanjut ke Latihan Penjumlahan →':'Lanjut ke eksplorasi berikutnya →'}</button></div>`);
+        document.getElementById('repeatAddExplore').onclick=()=>{
+          renderScenario();
+          document.getElementById('addLab')?.scrollIntoView({behavior:'smooth',block:'start'});
+        };
+        document.getElementById('nextAddExplore').onclick=()=>{
+          if(!isLast){
+            currentIndex++;
+            renderScenario();
+            document.getElementById('addLab')?.scrollIntoView({behavior:'smooth',block:'start'});
+          }else{
+            currentIndex=scenarios.length;
+            renderProgress();
+            startTopicPractice({title:'Latihan Penjumlahan',subtitle:'Kerjakan 5 soal acak.',count:5,makeQuestion:additionQuestion,onComplete:()=>{complete('addition');go('subtraction')}});
+          }
+        };
       });
     }
   }

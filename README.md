@@ -63,3 +63,9 @@ Perkalian menggunakan konteks perubahan skor permainan. Pembagian menggunakan ko
 - Menambahkan pengenalan bilangan bulat di awal.
 - Menambahkan animasi pasangan nol berbasis interaksi: +1 → −1 → 0.
 - Aktivitas pasangan nol baru terbuka setelah animasi interaktif selesai.
+
+
+## Perubahan v14
+- Perpindahan eksplorasi penjumlahan dan pengurangan tidak lagi otomatis.
+- Setelah jawaban benar, siswa memilih **Ulangi eksplorasi** atau **Lanjut ke eksplorasi berikutnya**.
+- Pada eksplorasi terakhir tersedia tombol menuju latihan topik.

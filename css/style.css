@@ -190,3 +190,9 @@ main{max-width:960px;padding:24px 20px 100px}
 @keyframes storyFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@keyframes storyCardPop{0%{transform:scale(.9)}60%{transform:scale(1.08)}100%{transform:scale(1)}}@keyframes mergePos{0%{transform:translateX(0)}70%,100%{transform:translateX(50px) scale(.9)}}@keyframes mergeNeg{0%{transform:translateX(0)}70%,100%{transform:translateX(-50px) scale(.9)}}@keyframes mergeArrow{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}@keyframes zeroPulse{0%{transform:scale(.9)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
 @media(max-width:640px){.intro-examples{grid-template-columns:1fr}.integer-numberline{gap:5px;padding:14px 8px}.integer-numberline span{min-width:38px;min-height:38px;font-size:.88rem}.zero-story{padding:16px 10px;min-height:330px}.story-card{width:82px;height:116px}.merge-card{width:72px;height:102px}.zero-story-stage{max-width:330px}}
 @media (prefers-reduced-motion:reduce){.story-card,.zero-story-stage,.merge-card,.merge-arrow,.zero-result{animation:none!important;transition:none!important}}
+
+
+/* v14: learner-controlled exploration navigation */
+.explore-actions{display:flex;gap:12px;justify-content:center;align-items:stretch;flex-wrap:wrap;margin-top:16px;padding-top:14px;border-top:1px solid #e6edf4}
+.explore-actions .btn{min-width:210px;flex:1 1 220px}
+@media (max-width:560px){.explore-actions{flex-direction:column}.explore-actions .btn{width:100%;min-width:0;flex:none}}
