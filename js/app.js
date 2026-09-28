@@ -158,19 +158,113 @@ function renderHome(){
 
 function renderIntro(){
   setLast('intro');
-  app.innerHTML=lessonShell('Kenali Kartu Bilangan','Satu kartu positif dan satu kartu negatif membentuk pasangan nol.',`<div class="section"><h2>Kenali dan pasangkan kartu</h2><p class="instruction">Kartu <b>+1 berwarna biru</b> dan kartu <b>−1 berwarna merah</b>. Seret satu kartu positif dan satu kartu negatif ke area <b>Pasangan Nol</b>, atau ketuk kedua kartu secara bergantian.</p>${verticalBoard(3,2,'introBoard')}<p id="introInfo" class="feedback" aria-live="polite">Pasangan nol ditemukan: 0</p></div>`);
-  let n=0;
-  const board=document.getElementById('introBoard');
-  enableZeroPairing(board,()=>{
-    n++;
-    const info=document.getElementById('introInfo');
-    info.textContent='Pasangan nol ditemukan: '+n;
-    if(n===2){
-      info.innerHTML='<div class="result-sentence"><span class="result-check">✓</span><div><b>Benar!</b><p>Dua pasangan bernilai 0. Tersisa satu kartu positif, jadi nilainya <b>+1</b>.</p></div></div>';
-      complete('intro');
-      nextButton('addition');
-    }
-  });
+  app.innerHTML=lessonShell('Pengenalan Bilangan Bulat','Kenali bilangan positif, bilangan negatif, dan pasangan nol sebelum mulai berhitung.',`
+    <section class="section intro-concept-card">
+      <p class="eyebrow">Mulai dari konsep dasar</p>
+      <h2>Apa itu bilangan bulat?</h2>
+      <p class="intro-lead">Bilangan bulat terdiri dari bilangan <b>positif</b>, <b>nol</b>, dan bilangan <b>negatif</b>. Bilangan positif berada di atas atau di sebelah kanan nol, sedangkan bilangan negatif berada di bawah atau di sebelah kiri nol.</p>
+      <div class="integer-numberline" aria-label="Garis bilangan dari negatif ke positif">
+        <span class="neg-dot">−3</span><span class="neg-dot">−2</span><span class="neg-dot">−1</span><span class="zero-dot">0</span><span class="pos-dot">+1</span><span class="pos-dot">+2</span><span class="pos-dot">+3</span>
+      </div>
+      <div class="intro-examples">
+        <div class="intro-example positive"><b>Bilangan positif</b><span>Contoh: +1, +2, +3</span></div>
+        <div class="intro-example zero"><b>Nol</b><span>Nol menjadi titik tengah.</span></div>
+        <div class="intro-example negative"><b>Bilangan negatif</b><span>Contoh: −1, −2, −3</span></div>
+      </div>
+    </section>
+
+    <section class="section zero-story-section">
+      <p class="eyebrow">Animasi interaktif</p>
+      <h2>Bagaimana +1 dan −1 menjadi 0?</h2>
+      <p class="instruction">Ikuti langkahnya dengan menyentuh kartu. Animasi hanya akan berlanjut setelah kamu berinteraksi.</p>
+      <div class="zero-story" id="zeroStory">
+        <div class="zero-story-step active" data-step="1">
+          <p><b>Langkah 1.</b> Ketuk kartu positif.</p>
+          <button class="story-card story-pos" id="storyPositive" aria-label="Kartu positif satu"><span>+</span><b>1</b></button>
+        </div>
+        <div class="zero-story-step" data-step="2">
+          <p><b>Langkah 2.</b> Sekarang ketuk kartu negatif.</p>
+          <button class="story-card story-neg" id="storyNegative" aria-label="Kartu negatif satu"><span>−</span><b>1</b></button>
+        </div>
+        <div class="zero-story-stage" id="zeroMergeStage" aria-live="polite">
+          <div class="merge-card merge-pos">+1</div>
+          <div class="merge-symbol">+</div>
+          <div class="merge-card merge-neg">−1</div>
+          <div class="merge-arrow">↓</div>
+          <button class="zero-result" id="zeroResult" aria-label="Hasil pasangan nol">0</button>
+        </div>
+        <div class="zero-story-message" id="zeroStoryMessage">Ketuk kartu <b>+1</b> untuk mulai.</div>
+      </div>
+    </section>
+
+    <section class="section intro-pair-practice locked-intro-practice" id="pairPracticeSection">
+      <p class="eyebrow">Coba sendiri</p>
+      <h2>Temukan pasangan nol</h2>
+      <p class="instruction">Setelah animasi selesai, pasangkan kartu <b>+1</b> dan <b>−1</b>. Kamu bisa menyeretnya ke area Pasangan Nol atau mengetuk kedua kartu secara bergantian.</p>
+      <div id="pairPracticeHost"><div class="intro-lock-note">Selesaikan animasi pasangan nol di atas terlebih dahulu.</div></div>
+      <p id="introInfo" class="feedback" aria-live="polite"></p>
+    </section>`);
+
+  const story=document.getElementById('zeroStory');
+  const pos=document.getElementById('storyPositive');
+  const neg=document.getElementById('storyNegative');
+  const stage=document.getElementById('zeroMergeStage');
+  const zero=document.getElementById('zeroResult');
+  const msg=document.getElementById('zeroStoryMessage');
+  const steps=[...story.querySelectorAll('.zero-story-step')];
+  let storyStep=1;
+
+  pos.onclick=()=>{
+    if(storyStep!==1)return;
+    pos.classList.add('story-selected','story-pop');
+    steps[0].classList.remove('active');
+    steps[0].classList.add('done');
+    steps[1].classList.add('active');
+    msg.innerHTML='Bagus. Sekarang ketuk kartu <b>−1</b>.';
+    storyStep=2;
+  };
+
+  neg.onclick=()=>{
+    if(storyStep!==2)return;
+    neg.classList.add('story-selected','story-pop');
+    steps[1].classList.remove('active');
+    steps[1].classList.add('done');
+    stage.classList.add('show','merge-run');
+    msg.innerHTML='Perhatikan. Kartu <b>+1</b> dan <b>−1</b> bergerak menjadi satu pasangan.';
+    storyStep=3;
+    setTimeout(()=>{
+      stage.classList.add('show-zero');
+      msg.innerHTML='<b>+1 + (−1) = 0.</b> Ketuk angka <b>0</b> untuk melanjutkan.';
+    },900);
+  };
+
+  zero.onclick=()=>{
+    if(storyStep!==3 || !stage.classList.contains('show-zero'))return;
+    zero.classList.add('zero-confirmed');
+    msg.innerHTML='<span class="result-check-inline">✓</span> Benar. Satu kartu positif dan satu kartu negatif saling meniadakan dan membentuk <b>pasangan nol</b>.';
+    storyStep=4;
+    unlockPairPractice();
+  };
+
+  function unlockPairPractice(){
+    const sec=document.getElementById('pairPracticeSection');
+    const host=document.getElementById('pairPracticeHost');
+    sec.classList.remove('locked-intro-practice');
+    host.innerHTML=verticalBoard(3,2,'introBoard');
+    const board=document.getElementById('introBoard');
+    let n=0;
+    enableZeroPairing(board,()=>{
+      n++;
+      const info=document.getElementById('introInfo');
+      info.textContent='Pasangan nol ditemukan: '+n;
+      if(n===2){
+        info.innerHTML='<div class="result-sentence"><span class="result-check">✓</span><div><b>Benar!</b><p>Dua pasangan bernilai 0. Tersisa satu kartu positif, jadi nilainya <b>+1</b>.</p></div></div>';
+        complete('intro');
+        nextButton('addition');
+      }
+    });
+    sec.scrollIntoView({behavior:'smooth',block:'start'});
+  }
 }
 
 function renderLearn(){const first=ORDER.find(x=>unlocked(x)&&!loadProgress().done.includes(x))||'intro';go(first)}
