@@ -76,3 +76,10 @@ Perkalian menggunakan konteks perubahan skor permainan. Pembagian menggunakan ko
 - Model matematika setiap kartu ditampilkan jelas: +1 dan -1.
 - Satu ketukan pada salah satu kartu menjalankan animasi +1 + (-1) menjadi 0.
 - Setelah animasi muncul kesimpulan (+1) + (-1) = 0, tombol Ulangi Animasi, dan Lanjut ke Penjumlahan.
+
+
+## Revisi v16
+- Eksplorasi penjumlahan dibangun bertahap dengan menekan tombol +1/−1 satu kartu setiap ketukan.
+- Setelah kedua bilangan terbentuk, siswa mengamati kartu lalu menekan Hitung.
+- Untuk tanda berbeda, aplikasi menjalankan animasi pasangan nol sebelum menghitung kartu tersisa.
+- Hasil akhir menampilkan jumlah kartu dan model matematika lengkap.
