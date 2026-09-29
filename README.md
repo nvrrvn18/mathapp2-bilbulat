@@ -83,3 +83,7 @@ Perkalian menggunakan konteks perubahan skor permainan. Pembagian menggunakan ko
 - Setelah kedua bilangan terbentuk, siswa mengamati kartu lalu menekan Hitung.
 - Untuk tanda berbeda, aplikasi menjalankan animasi pasangan nol sebelum menghitung kartu tersisa.
 - Hasil akhir menampilkan jumlah kartu dan model matematika lengkap.
+
+
+## Perubahan v17
+Eksplorasi pengurangan dibuat bertahap: membentuk nilai awal satu kartu per ketukan, menambahkan pasangan nol bila kartu yang harus diambil belum tersedia, menganimasikan kartu yang diambil, lalu menghitung kartu yang tersisa.
