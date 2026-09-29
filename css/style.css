@@ -236,7 +236,37 @@ main{max-width:960px;padding:24px 20px 100px}
   .guided-add-lab .math-model-card,.guided-sub-lab .math-model-card{position:sticky;top:72px;z-index:8;box-shadow:0 12px 30px rgba(19,49,92,.14)}
 }
 @media (max-width:768px){
-  .guided-add-lab .math-model-card,.guided-sub-lab .math-model-card,.add-model-card{position:static!important;top:auto!important}
+  .guided-add-lab .math-model-card,.guided-sub-lab .math-model-card,.add-model-card{
+    position:sticky!important;
+    top:58px!important;
+    z-index:9;
+    margin:8px auto 14px;
+    padding:9px 12px!important;
+    max-width:calc(100vw - 28px);
+    border-radius:14px;
+    background:rgba(255,255,255,.88)!important;
+    -webkit-backdrop-filter:blur(10px);
+    backdrop-filter:blur(10px);
+    box-shadow:0 8px 18px rgba(19,49,92,.12)!important;
+    border:1px solid rgba(207,226,246,.95);
+  }
+  .guided-add-lab .math-model-card .math-model-label,.guided-sub-lab .math-model-card .math-model-label{
+    font-size:.62rem;
+    margin-bottom:2px;
+  }
+  .guided-add-lab .math-model-card .math-model-expression,.guided-sub-lab .math-model-card .math-model-expression{
+    font-size:1.28rem;
+    line-height:1.08;
+  }
+}
+@media (max-width:420px){
+  .guided-add-lab .math-model-card,.guided-sub-lab .math-model-card,.add-model-card{
+    top:54px!important;
+    max-width:calc(100vw - 20px);
+    padding:8px 10px!important;
+    border-radius:12px;
+  }
+  .guided-add-lab .math-model-card .math-model-expression,.guided-sub-lab .math-model-card .math-model-expression{font-size:1.18rem}
 }
 .topic-conclusion{padding:20px;border-radius:22px;background:linear-gradient(180deg,#ffffff,#f8fbff);border:1px solid #dbe7f1}
 .topic-conclusion h3{margin:.15rem 0 .4rem;font-size:1.55rem;color:#173a59}

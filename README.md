@@ -93,3 +93,9 @@ Eksplorasi pengurangan dibuat bertahap: membentuk nilai awal satu kartu per ketu
 - Model matematika eksplorasi penjumlahan dan pengurangan sticky/floating pada desktop, tetapi tetap statis pada mobile.
 - Pengurangan menambah eksplorasi 2 − 3 dan −2 − (−3).
 - Sebelum latihan penjumlahan/pengurangan, siswa melihat kesimpulan dari seluruh model matematika yang telah dieksplorasi.
+
+
+## v19
+- Model matematika eksplorasi penjumlahan dan pengurangan tetap sticky pada mobile.
+- Tampilan mobile dibuat compact, semi-transparan, dan menggunakan blur agar tidak menghalangi kartu.
+- Desktop sticky behavior tetap dipertahankan.
