@@ -219,7 +219,7 @@ function renderAddition(){
         </div>`;
       resultZone.querySelectorAll('.int-card').forEach(c=>c.draggable=false);
       const isLast=currentIndex===scenarios.length-1;
-      resultZone.insertAdjacentHTML('beforeend',`<div class="explore-actions pop"><button id="repeatAddExplore" class="btn secondary" type="button">↻ Ulangi eksplorasi</button><button id="nextAddExplore" class="btn" type="button">${isLast?'Lanjut ke Latihan Penjumlahan →':'Lanjut ke eksplorasi berikutnya →'}</button></div>`);
+      resultZone.insertAdjacentHTML('beforeend',`<div class="explore-actions pop"><button id="repeatAddExplore" class="btn secondary" type="button">↻ Ulangi eksplorasi</button><button id="nextAddExplore" class="btn" type="button">${isLast?'Lihat Kesimpulan Penjumlahan →':'Lanjut ke eksplorasi berikutnya →'}</button></div>`);
       document.getElementById('repeatAddExplore').onclick=()=>{
         renderScenario();
         document.getElementById('addLab')?.scrollIntoView({behavior:'smooth',block:'start'});
@@ -232,10 +232,34 @@ function renderAddition(){
         }else{
           currentIndex=scenarios.length;
           renderProgress();
-          startTopicPractice({title:'Latihan Penjumlahan',subtitle:'Kerjakan 5 soal acak.',count:5,makeQuestion:additionQuestion,onComplete:()=>{complete('addition');go('subtraction')}});
+          renderAdditionConclusion();
         }
       };
     }
+  }
+
+  function renderAdditionConclusion(){
+    const lab=document.getElementById('addLab');
+    lab.innerHTML=`
+      <section class="topic-conclusion pop">
+        <p class="eyebrow">Kesimpulan Penjumlahan</p>
+        <h3>Apa yang kamu temukan?</h3>
+        <p class="conclusion-intro">Perhatikan kembali model matematika dari setiap eksplorasi.</p>
+        <div class="conclusion-equation-grid">
+          ${scenarios.map((s,i)=>`<div class="conclusion-equation-card"><small>Eksplorasi ${i+1}</small><strong>${plainNumber(s.a)} + ${resultTerm(s.b)} = ${plainNumber(s.answer)}</strong><span>${Math.sign(s.a)===Math.sign(s.b)?`Tandanya sama, kartu digabung menjadi ${Math.abs(s.answer)} kartu ${s.answer>0?'positif':'negatif'}.`:`Pasangan +1 dan −1 menjadi 0. Tersisa ${Math.abs(s.answer)} kartu ${s.answer>0?'positif':'negatif'}.`}</span></div>`).join('')}
+        </div>
+        <div class="conclusion-rule-box">
+          <b>Kesimpulan</b>
+          <p>Jika tandanya sama, jumlahkan banyak kartunya dan pertahankan tandanya. Jika tandanya berbeda, bentuk pasangan nol. Tanda hasil mengikuti kartu yang masih tersisa.</p>
+        </div>
+        <div class="explore-actions">
+          <button class="btn secondary" id="reviewAddExplore" type="button">← Ulangi eksplorasi</button>
+          <button class="btn" id="startAddPractice" type="button">Mulai Latihan Penjumlahan →</button>
+        </div>
+      </section>`;
+    document.getElementById('reviewAddExplore').onclick=()=>{currentIndex=0;renderScenario();document.getElementById('addLab')?.scrollIntoView({behavior:'smooth',block:'start'});};
+    document.getElementById('startAddPractice').onclick=()=>startTopicPractice({title:'Latihan Penjumlahan',subtitle:'Kerjakan 5 soal acak.',count:5,makeQuestion:additionQuestion,onComplete:()=>{complete('addition');go('subtraction')}});
+    lab.scrollIntoView({behavior:'smooth',block:'start'});
   }
 
   renderScenario();

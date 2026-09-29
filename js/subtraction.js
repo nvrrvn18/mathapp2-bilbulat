@@ -1,9 +1,11 @@
 function renderSubtraction(){
   setLast('subtraction');
   const scenarios=[
-    {id:'pp',label:'Positif − Positif',a:5,b:2,answer:3},
+    {id:'pp1',label:'Positif − Positif',a:5,b:2,answer:3},
+    {id:'pp2',label:'Positif − Positif (hasil negatif)',a:2,b:3,answer:-1},
     {id:'pn',label:'Positif − Negatif',a:2,b:-3,answer:5},
-    {id:'nn',label:'Negatif − Negatif',a:-5,b:-2,answer:-3},
+    {id:'nn1',label:'Negatif − Negatif',a:-5,b:-2,answer:-3},
+    {id:'nn2',label:'Negatif − Negatif (nilai kedua lebih besar)',a:-2,b:-3,answer:1},
     {id:'np',label:'Negatif − Positif',a:-2,b:3,answer:-5}
   ];
   let currentIndex=0;
@@ -247,7 +249,7 @@ function renderSubtraction(){
         </div>`;
       resultZone.querySelectorAll('.int-card').forEach(c=>c.draggable=false);
       const isLast=currentIndex===scenarios.length-1;
-      resultZone.insertAdjacentHTML('beforeend',`<div class="explore-actions pop"><button id="repeatSubExplore" class="btn secondary" type="button">↻ Ulangi eksplorasi</button><button id="nextSubExplore" class="btn" type="button">${isLast?'Lanjut ke Latihan Pengurangan →':'Lanjut ke eksplorasi berikutnya →'}</button></div>`);
+      resultZone.insertAdjacentHTML('beforeend',`<div class="explore-actions pop"><button id="repeatSubExplore" class="btn secondary" type="button">↻ Ulangi eksplorasi</button><button id="nextSubExplore" class="btn" type="button">${isLast?'Lihat Kesimpulan Pengurangan →':'Lanjut ke eksplorasi berikutnya →'}</button></div>`);
       document.getElementById('repeatSubExplore').onclick=()=>{
         renderScenario();
         document.getElementById('subLab')?.scrollIntoView({behavior:'smooth',block:'start'});
@@ -260,10 +262,34 @@ function renderSubtraction(){
         }else{
           currentIndex=scenarios.length;
           renderProgress();
-          startTopicPractice({title:'Latihan Pengurangan',subtitle:'Kerjakan 5 soal acak.',count:5,makeQuestion:subtractionQuestion,onComplete:()=>{complete('subtraction');go('multiplication')}});
+          renderSubtractionConclusion();
         }
       };
     }
+  }
+
+  function renderSubtractionConclusion(){
+    const lab=document.getElementById('subLab');
+    lab.innerHTML=`
+      <section class="topic-conclusion pop">
+        <p class="eyebrow">Kesimpulan Pengurangan</p>
+        <h3>Apa yang kamu temukan?</h3>
+        <p class="conclusion-intro">Perhatikan kembali model matematika dari setiap eksplorasi pengurangan.</p>
+        <div class="conclusion-equation-grid">
+          ${scenarios.map((s,i)=>`<div class="conclusion-equation-card"><small>Eksplorasi ${i+1}</small><strong>${plainNumber(s.a)} − ${resultTerm(s.b)} = ${plainNumber(s.answer)}</strong><span>${(s.a>0?1:-1)===(s.b>0?1:-1) && Math.abs(s.a)>=Math.abs(s.b)?`Kartu ${s.b>0?'positif':'negatif'} yang tersedia dapat langsung diambil.`:`Jika kartu ${s.b>0?'positif':'negatif'} belum cukup, tambahkan pasangan nol sampai kartu yang akan diambil tersedia.`}</span></div>`).join('')}
+        </div>
+        <div class="conclusion-rule-box">
+          <b>Kesimpulan</b>
+          <p>Pengurangan berarti mengambil kartu sesuai bilangan yang dikurangkan. Jika kartu yang akan diambil belum tersedia, tambahkan pasangan nol (+1 dan −1) tanpa mengubah nilai awal, lalu ambil kartu yang diperlukan dan hitung sisanya.</p>
+        </div>
+        <div class="explore-actions">
+          <button class="btn secondary" id="reviewSubExplore" type="button">← Ulangi eksplorasi</button>
+          <button class="btn" id="startSubPractice" type="button">Mulai Latihan Pengurangan →</button>
+        </div>
+      </section>`;
+    document.getElementById('reviewSubExplore').onclick=()=>{currentIndex=0;renderScenario();document.getElementById('subLab')?.scrollIntoView({behavior:'smooth',block:'start'});};
+    document.getElementById('startSubPractice').onclick=()=>startTopicPractice({title:'Latihan Pengurangan',subtitle:'Kerjakan 5 soal acak.',count:5,makeQuestion:subtractionQuestion,onComplete:()=>{complete('subtraction');go('multiplication')}});
+    lab.scrollIntoView({behavior:'smooth',block:'start'});
   }
 
   renderScenario();

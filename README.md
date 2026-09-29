@@ -87,3 +87,9 @@ Perkalian menggunakan konteks perubahan skor permainan. Pembagian menggunakan ko
 
 ## Perubahan v17
 Eksplorasi pengurangan dibuat bertahap: membentuk nilai awal satu kartu per ketukan, menambahkan pasangan nol bila kartu yang harus diambil belum tersedia, menganimasikan kartu yang diambil, lalu menghitung kartu yang tersisa.
+
+
+## Pembaruan v18
+- Model matematika eksplorasi penjumlahan dan pengurangan sticky/floating pada desktop, tetapi tetap statis pada mobile.
+- Pengurangan menambah eksplorasi 2 − 3 dan −2 − (−3).
+- Sebelum latihan penjumlahan/pengurangan, siswa melihat kesimpulan dari seluruh model matematika yang telah dieksplorasi.
