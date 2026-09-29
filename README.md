@@ -69,3 +69,10 @@ Perkalian menggunakan konteks perubahan skor permainan. Pembagian menggunakan ko
 - Perpindahan eksplorasi penjumlahan dan pengurangan tidak lagi otomatis.
 - Setelah jawaban benar, siswa memilih **Ulangi eksplorasi** atau **Lanjut ke eksplorasi berikutnya**.
 - Pada eksplorasi terakhir tersedia tombol menuju latihan topik.
+
+
+## Versi 15
+- Bagian Temukan Pasangan Nol diubah menjadi animasi satu ketukan.
+- Model matematika setiap kartu ditampilkan jelas: +1 dan -1.
+- Satu ketukan pada salah satu kartu menjalankan animasi +1 + (-1) menjadi 0.
+- Setelah animasi muncul kesimpulan (+1) + (-1) = 0, tombol Ulangi Animasi, dan Lanjut ke Penjumlahan.
